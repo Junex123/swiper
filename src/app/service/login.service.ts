@@ -18,16 +18,18 @@ export class LoginService {
     return this.http.get<any>(`${this.baseUrl}/current-user`);
   }
 
-  //generate token
-  public generateToken(credentials: Credentials): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/generate-token`, credentials);
-  }
+//generate token
+public generateToken(credentials: Credentials): Observable<any> {
+  console.log('Generating token...');
+  return this.http.post<any>(`${this.baseUrl}/generate-token`, credentials);
+}
 
-  //login user: set token in local storage
-  public loginUser(token: any) {
-    localStorage.setItem('token', token);
-    return true;
-  }
+//login user: set token in local storage
+public loginUser(token: any) {
+  console.log('Logging in user...');
+  localStorage.setItem('token', token);
+  return true;
+}
 
   //is logged in: user is logged in or not
   public isLoggedIn() {
@@ -38,11 +40,28 @@ export class LoginService {
       return true;
     }
   }
+ // Function to extract username from token
+ getUsernameFromToken(token: string): string {
+  const decodedToken = this.decodeToken(token);
+  return decodedToken ? decodedToken.sub : null; // Assuming 'sub' contains the username
+}
 
+// Function to decode JWT token
+private decodeToken(token: string): any {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(window.atob(base64));
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+}
   //logout user: remove token from local storage
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('cartCount'); // Remove cart count
     return true;
   }
   public logoutadmin() {
@@ -60,16 +79,18 @@ export class LoginService {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  //get user details from local storage
-  public getUserDetails() {
-    let user = localStorage.getItem('user');
-    if (user != null) {
-      return JSON.parse(user);
-    } else {
-      this.logout();
-      return null;
-    }
+ //get user details from local storage
+public getUserDetails() {
+  let user = localStorage.getItem('user');
+  if (user != null) {
+    console.log('User details retrieved from local storage:', user);
+    return JSON.parse(user);
+  } else {
+    this.logout();
+    console.log('No user details found in local storage');
+    return null;
   }
+}
 
   //get user role
   public getUserRole() {
@@ -77,5 +98,12 @@ export class LoginService {
     return user.authorities[0].authority;
   }
 
+  forgotPassword(email: string): Observable<string> {
+    return this.http.get<string>(`${this.baseUrl}/forgot-password?email=${email}`);
+  }
+
+  resetPassword(email: string, token: string, newPassword: string): Observable<string> {
+    return this.http.get<string>(`${this.baseUrl}/reset-password?email=${email}&token=${token}&newPassword=${newPassword}`);
+  }
 
 }

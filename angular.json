@@ -3,19 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fambruh2.0": {
+    "issuesizeaddandshow": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -23,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/fambruh2.0",
+            "outputPath": "dist/issuesizeaddandshow",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -35,17 +25,13 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
-              "node_modules/swiper/swiper-bundle.css",
-              "node_modules/@iconscout/unicons/css/line.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/swiper/swiper.min.css"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
-            
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "node_modules/swiper/swiper.min.js"]
           },
           "configurations": {
             "production": {
@@ -75,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "fambruh2.0:build:production"
+              "buildTarget": "issuesizeaddandshow:build:production"
             },
             "development": {
-              "buildTarget": "fambruh2.0:build:development"
+              "buildTarget": "issuesizeaddandshow:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "fambruh2.0:build"
+            "buildTarget": "issuesizeaddandshow:build"
           }
         },
         "test": {

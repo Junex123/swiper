@@ -6,3 +6,8 @@ export class Wishlist {
     user!: User;
     product!: Product;
 }
+export class WishlistResponseDto{
+    wishid!:number;
+    user!: User;
+    product!: Product;
+}

@@ -1,27 +1,50 @@
 <header class="cd-header">
-	<div class="header-wrapper">
-		<div class="logo-wrap">
-			<a routerLink="login&signup" href="#" class="hover-target"><span>your</span>logo</a>
-		</div>
-		<div class="nav-but-wrap">
-			<div class="menu-icon hover-target">
-				<span class="menu-icon__line menu-icon__line-left"></span>
-				<span class="menu-icon__line"></span>
-				<span class="menu-icon__line menu-icon__line-right"></span>
-			</div>					
-		</div>					
-	</div>				
+    <div class="header-wrapper">
+        <div class="logo-wrap">
+            <!-- Use Angular routerLink directive to navigate -->
+            <a routerLink="" href="#" class="hover-target">FAMBRUH</a>
+        </div>
+
+        <div class="nav-but-wrap">
+            <div class="menu-icon hover-target" (click)="toggleNav()">
+                <span class="menu-icon__line menu-icon__line-left"></span>
+                <span class="menu-icon__line"></span>
+                <span class="menu-icon__line menu-icon__line-right"></span>
+            </div><br>
+            <a class="cart-button" routerLink="/cart/">
+                <span class="bag-count">{{cartCount}}</span>
+                <span class="bag-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                </span>
+              
+            </a><br><br>
+            <a class="wishlist-button" routerLink="/wishlist">
+              <span class="heart-count">{{wishlistCount}}</span>
+              <span class="heart-icon">
+                  <i class="fa fa-heart"></i>
+              </span>
+            
+          </a>
+        </div>
+    </div>
 </header>
 
-<div class="nav">
-	<div class="nav__content">
-		<ul class="nav__list">
-			<li class="nav__list-item active-nav"><a href="#" class="hover-target">home</a></li>
-			<li class="nav__list-item"><a href="#" class="hover-target">studio</a></li>
-			<li class="nav__list-item"><a href="#" class="hover-target">news</a></li>
-			<li class="nav__list-item"><a href="#" class="hover-target">contact</a></li>
-		</ul>
+
+  <div class="nav"  (click)="closeNav()">
+	<div class="nav__content" (click)="closeNav()">
+	  <ul class="nav__list">
+		<li class="nav__list-item"><a routerLink="/" class="hover-target">home</a></li>
+		<li class="nav__list-item"><a routerLink="/affiliate" class="hover-target">affiliate</a></li>
+		<li class="nav__list-item"><a routerLink="/blogs" class="hover-target">news</a></li>
+		<li class="nav__list-item"><a routerLink="/productform" class="hover-target">ProductForm</a></li>
+		<li class="nav__list-item"><a *ngIf="!loginService.isLoggedIn()"  routerLink="/login" class="hover-target">log in</a></li>
+		<li class="nav__list-item" *ngIf="username !== 'fambruh@army'">
+			<a  routerLink="/profile" *ngIf="loginService.isLoggedIn()" class="hover-target">{{username}}</a>
+		  </li>
+		  
+		<li class="nav__list-item"><a *ngIf="loginService.isLoggedIn() && username === 'fambruh@army'" routerLink="/dashboard" class="hover-target">ADMIN</a></li>
+
+	  </ul>
 	</div>
-</div>		
-
-
+  </div>
+  

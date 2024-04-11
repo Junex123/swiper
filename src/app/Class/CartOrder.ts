@@ -1,7 +1,7 @@
-import { ProductQuantity } from "./product";
+import { OrderItem } from "./order-item";
 
-export class OrderSummary {
-    oid!: number;
+export class CartOrder {
+   
     username!: string;
     firstName!: string;
     lastName!: string;
@@ -12,7 +12,6 @@ export class OrderSummary {
     contact!: string;
     paidAmount!: number;
     paymentMode!: string;
-    status!: string;
-    date!: string;
-    products: ProductQuantity[] = [];
+    cartItem: OrderItem[] = [];
+
 }

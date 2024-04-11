@@ -16,7 +16,7 @@ export class AdminGuard{
     if (this.loginService.isLoggedIn() && this.loginService.getUserRole() == 'ADMIN') {
       return true;
     }
-    this.router.navigate(['adminlogin']);
+    this.router.navigate(['login']);
     return false;
 
   }

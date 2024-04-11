@@ -16,7 +16,7 @@ export class UserGuard{
     if (this.loginService.isLoggedIn() && this.loginService.getUserRole() == 'USER') {
       return true;
     }
-    this.router.navigate(['login']);
+    this.router.navigate(['/login&signup']);
     return false;
 
   }
